@@ -1,0 +1,51 @@
+@page "/hunting"
+@using MauiTreasureHunter.Infrastructure.Services
+@inject IGeolocationService GeolocationService
+@inject IAudioService AudioService
+
+@* AR Hunting Mode View *@
+<div class="hunting-view">
+    <h1>Treasure Hunting Mode</h1>
+    
+    <div class="hud">
+        <div class="points-display">
+            <h2>Points: @TotalPoints</h2>
+        </div>
+        
+        <div class="nearby-treasures">
+            <h3>Nearby Treasures: @NearbyTreasureCount</h3>
+        </div>
+    </div>
+    
+    <div class="ar-camera-container">
+        <ARCameraView />
+    </div>
+    
+    <div class="radar-display">
+        <h4>Radar</h4>
+        <p>Showing treasures within 100m</p>
+        @* TODO: Implement radar visualization *@
+    </div>
+    
+    <div class="controls">
+        <button class="btn btn-primary" @onclick="SwitchToCreationMode">Switch to Creation Mode</button>
+    </div>
+</div>
+
+@code {
+    private int TotalPoints = 0;
+    private int NearbyTreasureCount = 0;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        // TODO: Initialize AR session
+        // TODO: Load user points from API
+        // TODO: Start location tracking
+        await Task.CompletedTask;
+    }
+    
+    private void SwitchToCreationMode()
+    {
+        // TODO: Navigate to creation mode
+    }
+}
