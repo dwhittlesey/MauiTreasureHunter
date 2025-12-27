@@ -119,9 +119,13 @@ public class TreasuresController : ControllerBase
                 return Ok(result);
             }
             
-            if (result.ErrorMessage?.Contains("not found") == true)
+            // Check for specific error conditions
+            if (result.ErrorMessage != null)
             {
-                return NotFound(result);
+                if (result.ErrorMessage.IndexOf("not found", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    return NotFound(result);
+                }
             }
             
             return BadRequest(result);

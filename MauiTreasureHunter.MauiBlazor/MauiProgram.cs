@@ -53,11 +53,14 @@ public static class MauiProgram
         builder.Services.AddScoped<IAudioService, AudioService>();
 
         // Note: In production, configure with actual database connection
-        // For now, this is a stub configuration
+        // For MAUI app, consider using SQLite for local storage
+        // or configure to connect to remote SQL Server API
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         {
             // TODO: Configure for SQLite or remote SQL Server
-            options.UseSqlServer("Data Source=:memory:");
+            // For now, this is a placeholder - actual DB context should be configured
+            // based on app requirements (local SQLite or API-based access)
+            options.UseSqlServer("Server=localhost;Database=MauiTreasureHunterDb;Trusted_Connection=true;");
         });
 
         return builder.Build();

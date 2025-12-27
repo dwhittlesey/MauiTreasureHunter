@@ -2,7 +2,7 @@ namespace MauiTreasureHunter.Infrastructure.Services;
 
 /// <summary>
 /// Stub implementation of AR service for ARCore integration
-/// Note: Full implementation requires XPACE.Google.ARCore integration
+/// Note: Full implementation requires Xamarin.Google.ARCore integration
 /// </summary>
 public class ARCoreService : IARService
 {
