@@ -1,0 +1,102 @@
+@page "/creation"
+@using MauiTreasureHunter.Domain.Enums
+@using MauiTreasureHunter.Infrastructure.Services
+@inject IGeolocationService GeolocationService
+@inject IAudioService AudioService
+
+@* AR Creation Mode View *@
+<div class="creation-view">
+    <h1>Treasure Creation Mode</h1>
+    
+    <div class="ar-camera-container">
+        <ARCameraView />
+    </div>
+    
+    <div class="treasure-controls">
+        <h3>Place a Treasure</h3>
+        
+        <div class="form-group">
+            <label for="treasureType">Treasure Type:</label>
+            <select id="treasureType" @bind="SelectedTreasureType">
+                <option value="@TreasureType.Coin">Coin (10 pts)</option>
+                <option value="@TreasureType.Gem">Gem (25 pts)</option>
+                <option value="@TreasureType.Artifact">Artifact (50 pts)</option>
+                <option value="@TreasureType.Chest">Chest (100 pts)</option>
+                <option value="@TreasureType.Custom">Custom</option>
+            </select>
+        </div>
+        
+        @if (SelectedTreasureType == TreasureType.Custom)
+        {
+            <div class="form-group">
+                <label for="pointValue">Point Value:</label>
+                <input id="pointValue" type="number" @bind="CustomPointValue" min="1" max="1000" />
+            </div>
+        }
+        
+        <div class="form-group">
+            <label for="treasureName">Treasure Name:</label>
+            <input id="treasureName" type="text" @bind="TreasureName" placeholder="Enter treasure name" />
+        </div>
+        
+        <button class="btn btn-success" @onclick="PlaceTreasure">Place Treasure</button>
+    </div>
+    
+    <div class="controls">
+        <button class="btn btn-primary" @onclick="SwitchToHuntingMode">Switch to Hunting Mode</button>
+        <button class="btn btn-secondary" @onclick="ViewInventory">View Inventory</button>
+    </div>
+    
+    @if (!string.IsNullOrEmpty(StatusMessage))
+    {
+        <div class="alert @(IsSuccess ? "alert-success" : "alert-danger")">
+            @StatusMessage
+        </div>
+    }
+</div>
+
+@code {
+    private TreasureType SelectedTreasureType = TreasureType.Coin;
+    private int CustomPointValue = 20;
+    private string TreasureName = string.Empty;
+    private string StatusMessage = string.Empty;
+    private bool IsSuccess = false;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        // TODO: Initialize AR session
+        // TODO: Check camera permissions
+        await Task.CompletedTask;
+    }
+    
+    private async Task PlaceTreasure()
+    {
+        try
+        {
+            // TODO: Get current location
+            // TODO: Call API to place treasure
+            // TODO: Play placement sound
+            
+            StatusMessage = $"Treasure '{TreasureName}' placed successfully!";
+            IsSuccess = true;
+            TreasureName = string.Empty;
+            
+            await Task.CompletedTask;
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Error placing treasure: {ex.Message}";
+            IsSuccess = false;
+        }
+    }
+    
+    private void SwitchToHuntingMode()
+    {
+        // TODO: Navigate to hunting mode
+    }
+    
+    private void ViewInventory()
+    {
+        // TODO: Navigate to inventory view
+    }
+}
